@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootswatch/dist/flatly/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/flatly/bootswatch";
+
+button.dropdown-item:focus {
+  outline: none;
+  outline: none;
+}
+
+.icon {
+  &.status {
+    font-size: 18px;
+  }
+}
+
+.labelClass {
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  color: #151e3d;
+}
+
+.custom-file-label::after {
+  content: 'Seleccionar';
+}

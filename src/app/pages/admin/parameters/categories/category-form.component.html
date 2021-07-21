@@ -1,0 +1,163 @@
+<div class="row justify-content-sm-center">
+  <div class="col-sm-8 col-md-6">
+    <div class="card border-0 shadow">
+      <form [formGroup]="form">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0 py-2">{{ title }}</h5>
+        </div>
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              maxlength="80"
+              placeholder="Nombre"
+              formControlName="name">
+            <ng-container *ngIf="isValid('name')">
+              <small class="form-text text-danger">
+                El nombre es requerido
+              </small>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <label for="slug">Slug</label>
+            <input
+              type="text"
+              class="form-control"
+              id="slug"
+              maxlength="120"
+              placeholder="Slug"
+              formControlName="slug">
+            <ng-container *ngIf="isValid('slug')">
+              <small class="form-text text-danger">
+                El slug es requerido
+              </small>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea
+              class="form-control"
+              id="description"
+              maxlength="250"
+              rows="3"
+              placeholder="Descripción"
+              formControlName="description"
+            ></textarea>
+            <ng-container *ngIf="isValid('description')">
+              <small class="form-text text-danger">
+                La descripción es requerida
+              </small>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Imagen</label>
+            <img
+              [src]="urlImage + form.get('imageUrl').value"
+              class="card-img-top mb-2"
+              *ngIf="id"
+            />
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="input-image"
+                  (change)="inputFile($event)"
+                >
+                <label class="custom-file-label" for="input-image">
+                  <span *ngIf="categoryImage"> {{categoryImage.name}} </span>
+                </label>
+              </div>
+            </div>
+            <ng-container *ngIf="errorImage">
+              <small class="form-text text-danger">
+                Debe seleccionar una imagen.
+              </small>
+            </ng-container>
+          </div>
+
+          <div formGroupName="seo">
+            <span class="text-muted">SEO</span>
+            <div class="form-group">
+              <label for="seo-title">Título</label>
+              <input
+                type="text"
+                class="form-control"
+                id="seo-title"
+                maxlength="120"
+                placeholder="Título"
+                formControlName="title">
+              <ng-container *ngIf="isValid('seo.title')">
+                <small class="form-text text-danger">
+                  El título del SEO es requerido
+                </small>
+              </ng-container>
+            </div>
+
+            <div class="form-group">
+              <label for="seo-description">Descripción</label>
+              <input
+                type="text"
+                class="form-control"
+                id="seo-description"
+                maxlength="250"
+                placeholder="Descripción"
+                formControlName="description">
+              <ng-container *ngIf="isValid('seo.description')">
+                <small class="form-text text-danger">
+                  La descripción del SEO es requerida
+                </small>
+              </ng-container>
+            </div>
+
+            <div class="form-group">
+              <label for="seo-keywords">Palabras clave</label>
+              <input
+                type="text"
+                class="form-control"
+                id="seo-keywords"
+                maxlength="120"
+                placeholder="Palabras clave"
+                formControlName="keywords">
+              <ng-container *ngIf="isValid('seo.keywords')">
+                <small class="form-text text-danger">
+                  Las palabras clave del SEO son requeridas
+                </small>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="disabled"
+                formControlName="status">
+              <label class="custom-control-label" for="disabled">
+                Activo
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer border-0 text-right">
+          <a [routerLink]="['/admin/parametros/categorias']" class="btn btn-warning shadow-none mr-2">
+            Regresar
+          </a>
+          <button type="submit" class="btn shadow-none" [ngClass]="{'btn-success': id, 'btn-primary': !id}"
+            [disabled]="form.invalid" (click)="save()">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

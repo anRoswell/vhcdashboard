@@ -1,0 +1,339 @@
+<div class="row justify-content-sm-center">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="card border-0 shadow">
+      <form [formGroup]="form">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0 py-2">
+            <span class="icon icon-office"></span>{{ title }}
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="name" class="labelClass">Nombre</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-user"></span>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  maxlength="150"
+                  formControlName="name"
+                  placeholder="Nombre de la empresa"
+                />
+              </div>
+
+              <ng-container *ngIf="isValid('name')">
+                <small id="nameHelp" class="form-text text-danger">
+                  El nombre es requerido
+                </small>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="alias" class="labelClass">Alias</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-smile"></span>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="alias"
+                  maxlength="60"
+                  formControlName="alias"
+                  placeholder="Alias"
+                />
+              </div>
+              <ng-container *ngIf="isValid('alias')">
+                <small id="aliasHelp" class="form-text text-danger">
+                  El alias es requerido
+                </small>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="email" class="labelClass">Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-mail"></span>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  maxlength="150"
+                  formControlName="email"
+                  placeholder="email"
+                />
+              </div>
+              <ng-container *ngIf="isValid('email')">
+                <small id="emailHelp" class="form-text text-danger">
+                  El email es requerido
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="identificationTypeId" class="labelClass"
+                >Tipo de identificación</label
+              >
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-disc"></span>
+                  </span>
+                </div>
+                <select
+                  id="inputState"
+                  class="form-control"
+                  formControlName="identificationTypeId"
+                >
+                  <option selected>Elegir</option>
+                  <option
+                    *ngFor="let identificationType of identificationTypes"
+                    value="{{ identificationType.id }}"
+                    >{{ identificationType.name }}</option
+                  >
+                </select>
+              </div>
+              <ng-container *ngIf="isValid('identificationTypeId')">
+                <small
+                  id="identificationTypeIdHelp"
+                  class="form-text text-danger"
+                >
+                  El numero de identificación es requerido
+                </small>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="identificationNumber" class="labelClass"
+                ># Identificación</label
+              >
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-hash"></span>
+                  </span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="identificationNumber"
+                  maxlength="20"
+                  formControlName="identificationNumber"
+                  placeholder="Identificacion"
+                />
+              </div>
+              <ng-container
+                *ngIf="
+                  form
+                    .get('identificationNumber')
+                    .hasError('identificationNumber')
+                "
+              >
+                <small
+                  id="identificationNumberHelp"
+                  class="form-text text-danger"
+                >
+                  El numero de identificación es obligatorio!!!
+                </small>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="address" class="labelClass">Dirección</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-map"></span>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  maxlength="100"
+                  formControlName="address"
+                  placeholder="Dirección"
+                />
+              </div>
+              <ng-container *ngIf="isValid('address')">
+                <small id="addressHelp" class="form-text text-danger">
+                  La direccion es requerido
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="phone" class="labelClass">Telefono</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-phone"></span>
+                  </span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="phone"
+                  maxlength="20"
+                  formControlName="phone"
+                />
+              </div>
+              <ng-container *ngIf="isValid('phone')">
+                <small id="phoneHelp" class="form-text text-danger">
+                  El telefono es requerido
+                </small>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="mobile" class="labelClass">Mobile</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-smartphone"></span>
+                  </span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="mobile"
+                  maxlength="20"
+                  formControlName="mobile"
+                />
+              </div>
+              <ng-container *ngIf="isValid('mobile')">
+                <small id="mobileHelp" class="form-text text-danger">
+                  El mobile es requerido
+                </small>
+              </ng-container>
+            </div>
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="vat" class="labelClass">Vat</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-life-buoy"></span>
+                  </span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="vat"
+                  maxlength="250"
+                  formControlName="vat"
+                />
+              </div>
+              <ng-container *ngIf="isValid('vat')">
+                <small id="vatHelp" class="form-text text-danger">
+                  El vat es requerido
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="taxes" class="labelClass">Taxes</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-life-buoy"></span>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="taxes"
+                  maxlength="150"
+                  formControlName="taxes"
+                />
+              </div>
+              <ng-container *ngIf="isValid('taxes')">
+                <small id="taxesHelp" class="form-text text-danger">
+                  El Taxes es requerido
+                </small>
+              </ng-container>
+            </div>
+
+            <div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <label for="message" class="labelClass">Mensaje</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="icon icon-message-circle"></span>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="message"
+                  maxlength="60"
+                  formControlName="message"
+                />
+              </div>
+              <ng-container *ngIf="isValid('message')">
+                <small id="messageHelp" class="form-text text-danger">
+                  El mensaje es requerido
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div
+              class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+            >
+              <label for="slogan" class="labelClass">Slogan</label>
+              <div class="input-group">
+                <textarea
+                  class="form-control"
+                  id="slogan"
+                  formControlName="slogan"
+                  rows="3"
+                  maxlength="100"
+                ></textarea>
+              </div>
+              <ng-container *ngIf="isValid('slogan')">
+                <small id="sloganHelp" class="form-text text-danger">
+                  El slogan es requerido
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="status"
+                formControlName="status"
+              />
+              <label class="custom-control-label" for="status">
+                Activo
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer border-0 text-right">
+          <button
+            type="submit"
+            class="btn shadow-none"
+            [ngClass]="{ 'btn-success': id, 'btn-primary': !id }"
+            [disabled]="form.invalid"
+            (click)="save()"
+          >
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- <p>{{ form.value | json }}</p> -->

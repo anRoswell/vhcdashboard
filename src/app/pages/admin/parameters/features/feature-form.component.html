@@ -1,0 +1,94 @@
+<div class="row justify-content-sm-center">
+  <div class="col-12 col-sm-6 col-md-6 col-md-4 col-lg-4 col-xl-4">
+    <div class="card border-0 shadow">
+      <form [formGroup]="form">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0 py-2">{{ title }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              maxlength="20"
+              formControlName="name"
+            />
+            <ng-container *ngIf="isValid('name')">
+              <small class="form-text text-danger">
+                El nombre es requerido
+              </small>
+            </ng-container>
+          </div>
+          <!-- Add nested items dynamically-->
+          <div class="group-gap" formArrayName="values">
+            <h6 class="mb-3">Opciones</h6>
+            <div class="mb-3">
+              <button
+                type="button"
+                class="btn btn-sm btn-success btn-block"
+                (click)="addItem()"
+              >
+                Agregar
+              </button>
+              <ng-container *ngIf="!isValid('name') && values.length == 0">
+                <small class="form-text text-danger">
+                  Debe agregar al menos una opción
+                </small>
+              </ng-container>
+              <div
+                class="row mt-3 mb-2"
+                *ngFor="let item of values.controls; index as id"
+              >
+                <div class="col-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [formControlName]="id"
+                    width="20px"
+                  />
+                </div>
+                <div class="col-3">
+                  <button (click)="deleteNameField(id)" class="btn btn-danger">
+                    <span class="icon icon-trash-2 text-white"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="disabled"
+                formControlName="status"
+              />
+              <label class="custom-control-label" for="disabled">
+                Activo
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer border-0 text-right">
+          <a
+            [routerLink]="['/admin/parametros/caracteristicas']"
+            class="btn btn-warning shadow-none mr-2"
+          >
+            Regresar
+          </a>
+          <button
+            type="submit"
+            class="btn shadow-none"
+            [ngClass]="{ 'btn-success': id, 'btn-primary': !id }"
+            [disabled]="form.invalid || values.length == 0"
+            (click)="save()"
+          >
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

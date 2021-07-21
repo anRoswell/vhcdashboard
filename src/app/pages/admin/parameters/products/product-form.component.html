@@ -1,0 +1,243 @@
+<div class="row justify-content-sm-center">
+  <div class="col-12">
+    <div class="card border-0 shadow">
+      <form [formGroup]="form" autocomplete="off">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0 py-2">{{ title }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              maxlength="150"
+              placeholder="Nombre"
+              formControlName="name">
+            <ng-container *ngIf="isInvalid('name')">
+              <small class="form-text text-danger">
+                El nombre es requerido
+              </small>
+            </ng-container>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="slug">Slug</label>
+              <input
+                type="text"
+                class="form-control"
+                id="slug"
+                maxlength="180"
+                placeholder="Nombre"
+                formControlName="slug">
+              <ng-container *ngIf="isInvalid('slug')">
+                <small class="form-text text-danger">
+                  El slug es requerido
+                </small>
+              </ng-container>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="code">Código</label>
+              <input
+                type="text"
+                class="form-control"
+                id="code"
+                maxlength="60"
+                placeholder="Código"
+                formControlName="code">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="excerpt">Descripción corta</label>
+            <textarea
+              rows="3"
+              class="form-control"
+              id="excerpt"
+              maxlength="250"
+              placeholder="Descripción corta"
+              formControlName="excerpt"
+            ></textarea>
+            <ng-container *ngIf="isInvalid('excerpt')">
+              <small class="form-text text-danger">
+                La descripción corta es requerida
+              </small>
+            </ng-container>
+          </div>
+          <div class="form-group">
+            <label for="excerpt">Descripción detallada</label>
+            <ckeditor
+              [editor]="Editor"
+              data="<p>Hello, world!</p>"
+              formControlName="description"
+              ></ckeditor>
+            <ng-container *ngIf="isInvalid('description')">
+              <small class="form-text text-danger">
+                La descripción es requerida
+              </small>
+            </ng-container>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="brandId">Marca</label>
+              <select
+                id="brandId"
+                class="form-control"
+                formControlName="brandId"
+                >
+                <option selected> Seleccione... </option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="measureId">Unidad de medida</label>
+              <select
+                id="measureId"
+                class="form-control"
+                formControlName="measureId"
+                >
+                <option selected> Seleccione... </option>
+                <option>...</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="packingId">Unidad de empaque</label>
+              <select
+                id="packingId"
+                class="form-control"
+                formControlName="packingId"
+                >
+                <option selected> Seleccione... </option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="taxId">Tarifa de impuesto</label>
+              <select
+                id="taxId"
+                class="form-control"
+                formControlName="taxId"
+                >
+                <option selected> Seleccione... </option>
+                <option>...</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="minStock">Stock mínimo</label>
+              <input
+                type="number"
+                class="form-control text-right"
+                id="minStock"
+                min="0"
+                placeholder="Stock mínimo"
+                formControlName="minStock">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="maxStock">Stock máximo</label>
+              <input
+                type="number"
+                class="form-control text-right"
+                id="maxStock"
+                min="0"
+                placeholder="Stock máximo"
+                formControlName="maxStock">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="balance">Saldo inicial</label>
+              <input
+                type="number"
+                class="form-control text-right"
+                id="balance"
+                min="0"
+                placeholder="Saldo inicial"
+                formControlName="balance">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="cost">Costo de compra</label>
+              <input
+                type="number"
+                class="form-control text-right"
+                id="cost"
+                min="0"
+                placeholder="Costo"
+                formControlName="cost">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="price">Precio de venta</label>
+              <input
+                type="number"
+                class="form-control text-right"
+                id="price"
+                min="0"
+                placeholder="Precio de venta"
+                formControlName="price">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="sale">Precio de oferta</label>
+              <input
+                type="number"
+                class="form-control text-right"
+                id="sale"
+                min="0"
+                placeholder="Saldo inicial"
+                formControlName="sale">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="onSale"
+                formControlName="onSale">
+              <label class="custom-control-label" for="onSale">
+                Producto en promoción
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <ng-multiselect-dropdown
+              name="categories"
+              [placeholder]="'Seleccione...'"
+              [settings]="dropdownSettings"
+              [data]="dropdownList"
+              formControlName="categories"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="disabled" formControlName="status">
+              <label class="custom-control-label" for="disabled">
+                Activo
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer border-0 text-right">
+          <a
+            [routerLink]="['/admin/parametros/marcas']"
+            class="btn btn-warning shadow-none mr-2">
+            Regresar
+          </a>
+          <button
+            type="submit"
+            class="btn shadow-none"
+            [ngClass]="{'btn-success': id, 'btn-primary': !id}"
+            [disabled]="form.invalid"
+            (click)="save()">
+            Guardar
+          </button>
+        </div>
+      </form>
+      {{ form.value | json }}
+    </div>
+  </div>
+</div>

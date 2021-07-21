@@ -1,0 +1,91 @@
+<div class="row justify-content-sm-center">
+  <div class="col-sm-8 col-md-6">
+    <div class="card border-0 shadow">
+      <form [formGroup]="form">
+        <div class="card-header border-0">
+          <h5 class="card-title mb-0 py-2">{{ title }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              maxlength="40"
+              placeholder="Nombre"
+              formControlName="name">
+            <ng-container *ngIf="isValid('name')">
+              <small class="form-text text-danger">
+                El nombre es requerido
+              </small>
+            </ng-container>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-2">
+              <label for="rate">Tarifa</label>
+              <input
+                type="number"
+                class="form-control"
+                id="rate"
+                min="0"
+                max="99"
+                placeholder="Tarifa"
+                formControlName="rate">
+              <ng-container *ngIf="isValid('rate')">
+                <ng-container *ngIf="form.get('rate').errors.required">
+                  <small class="form-text text-danger">
+                    La tarifa es requerida
+                  </small>
+                </ng-container>
+                <ng-container *ngIf="form.get('rate').errors.min">
+                  <small class="form-text text-danger">
+                    La tarifa mínima debe ser 0%
+                  </small>
+                </ng-container>
+                <ng-container *ngIf="form.get('rate').errors.max">
+                  <small class="form-text text-danger">
+                    La tarifa máxima debe ser 99%
+                  </small>
+                </ng-container>
+              </ng-container>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="code">Código</label>
+              <input
+                type="text"
+                class="form-control"
+                id="code"
+                maxlength="5"
+                placeholder="Código"
+                formControlName="code">
+              <ng-container *ngIf="isValid('code')">
+                <small class="form-text text-danger">
+                  El código es requerido
+                </small>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="disabled" formControlName="status">
+              <label class="custom-control-label" for="disabled">
+                Activo
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer border-0 text-right">
+          <a [routerLink]="['/admin/parametros/impuestos']" class="btn btn-warning shadow-none mr-2">
+            Regresar
+          </a>
+          <button type="submit" class="btn shadow-none" [ngClass]="{'btn-success': id, 'btn-primary': !id}"
+            [disabled]="form.invalid" (click)="save()">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
